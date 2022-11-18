@@ -1,0 +1,106 @@
+$theme-color: #5bb431;
+$page-color: #f2f2f2;
+$tabbar-height: 210rpx;
+
+@mixin circle($size) {
+  width: $size;
+  height: $size;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+@mixin btn {
+  user-select: none;
+
+  &:active {
+    opacity: 0.5;
+  }
+}
+
+@mixin abs($dir) {
+  position: absolute;
+
+  @if $dir==cer {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  } @else if $dir==x {
+    left: 50%;
+    transform: translateX(-50%);
+  } @else if $dir==y {
+    top: 50%;
+    transform: translateY(-50%);
+  } @else if $dir==full {
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+}
+
+@mixin rowMachine($numPerRow, $margin) {
+  width: calc((100% - (($numPerRow - 1) * $margin)) / $numPerRow);
+
+  &:nth-child(n) {
+    margin-bottom: $margin;
+    margin-right: $margin;
+  }
+
+  &:nth-child(#{$numPerRow}n) {
+    margin-right: 0;
+  }
+}
+
+@mixin triangle($size: 5px, $color: rgba(0, 0, 0, 0.6), $dir: bottom) {
+  width: 0;
+  height: 0;
+  border-style: solid;
+
+  @if (bottom==$dir) {
+    border-width: $size $size 0 $size;
+    border-color: $color transparent transparent transparent;
+  } @else if (top==$dir) {
+    border-width: 0 $size $size $size;
+    border-color: transparent transparent $color transparent;
+  } @else if (right==$dir) {
+    border-width: $size 0 $size $size;
+    border-color: transparent transparent transparent $color;
+  } @else if (left==$dir) {
+    border-width: $size $size $size 0;
+    border-color: transparent $color transparent transparent;
+  }
+}
+
+@mixin title-bottom-line($height, $color, $bottom: null) {
+  position: relative;
+
+  &::after {
+    content: '';
+    display: block;
+    width: 100%;
+    height: $height;
+    border-radius: calc(#{$height} * 0.5);
+    background: $color;
+    position: absolute;
+
+    @if $bottom ==null {
+      bottom: calc(0rpx - (#{$height} * 0.5));
+    }
+
+    else {
+      bottom: $bottom;
+    }
+  }
+}
+
+@mixin list($num, $gap) {
+  --num: #{$num};
+  --gap: #{$gap};
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--gap);
+}
+
+@mixin listItem {
+  width: calc((100% - (var(--gap) * (var(--num) - 1))) / var(--num));
+}

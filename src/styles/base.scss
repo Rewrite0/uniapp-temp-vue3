@@ -1,0 +1,155 @@
+:not(not) {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+page {
+  background: $page-color;
+  font-size: 22.6rpx;
+  line-height: 1.5;
+}
+
+.status-bar {
+  height: var(--status-bar-height);
+}
+
+.full {
+  width: 100%;
+  height: 100%;
+}
+
+/* =============== Start flex =============== */
+[flex] {
+  display: flex;
+}
+
+[gap][col],
+[flex~='col'] {
+  flex-direction: column;
+}
+
+[flex~='wrap'] {
+  flex-wrap: wrap;
+}
+
+[flex~='cer'] {
+  align-items: center;
+  justify-content: center;
+}
+
+[flex~='ai-cer'] {
+  align-items: center;
+}
+
+[flex~='ai-start'] {
+  align-items: flex-start;
+}
+
+[flex~='ai-end'] {
+  align-items: flex-end;
+}
+
+[flex~='baseline'] {
+  align-items: baseline;
+}
+
+[flex~='jc-sb'] {
+  justify-content: space-between;
+}
+
+[flex~='jc-cer'] {
+  justify-content: center;
+}
+
+[flex~='jc-sa'] {
+  justify-content: space-around;
+}
+
+[flex~='jc-se'] {
+  justify-content: space-evenly;
+}
+
+// flex gap间距
+@for $number from 1 through 50 {
+  [gap='#{$number}'] {
+    display: flex;
+    gap: #{$number}rpx;
+  }
+
+  [mt='#{$mt}'] {
+    margin-top: #{$number}rpx;
+  }
+
+  [ml='#{$mt}'] {
+    margin-left: #{$number}rpx;
+  }
+
+  [mr='#{$mt}'] {
+    margin-right: #{$number}rpx;
+  }
+
+  @if $number < 20 {
+    [ra='#{$number}'] {
+      border-radius: #{$number}rpx;
+    }
+  }
+}
+
+[mt~='auto'] {
+  margin-top: auto;
+}
+
+[ml='auto'] {
+  margin-left: auto;
+}
+
+[mr='auto'] {
+  margin-right: auto;
+}
+
+[tc] {
+  text-align: center;
+}
+
+[tl] {
+  text-align: left;
+}
+
+[tr] {
+  text-align: right;
+}
+
+[nowrap] {
+  white-space: nowrap;
+}
+
+[bold] {
+  font-weight: bold;
+}
+
+.imgbg {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.button-hover,
+.btn {
+  opacity: 0.5;
+}
+
+.limit {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: var(--limit, 1);
+}
+
+@for $num from 2 to 6 {
+  .limit#{$num} {
+    @extend .limit;
+    --limit: #{$num};
+  }
+}
