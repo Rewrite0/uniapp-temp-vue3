@@ -9,6 +9,7 @@ export default {
         page: 1,
         get: true,
       },
+      statusBarHeight: 0,
     };
   },
   methods: {
@@ -24,8 +25,19 @@ export default {
       const has = tabPages.includes(route);
       if (has) uni.hideTabBar();
     },
+
+    exemptClass(exempt) {
+      if (exempt == '有效' || exempt == '已延期') {
+        return 'tag-primary';
+      } else if (exempt == '即将到期') {
+        return 'tag-warning';
+      } else if (exempt == '已过期') {
+        return 'tag-error';
+      }
+    },
   },
   mounted() {
+    this.statusBarHeight = uni.getStorageSync('statusBarHeight');
     // 隐藏tabbar
     // this.hideTabbar();
   },

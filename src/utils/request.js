@@ -9,9 +9,13 @@ import config from '@/config.js';
  */
 const request = async ({ url, data, method }) => {
   const apiUrl = config.baseurl + url;
+
+  uni.showLoading();
+
   try {
+    let res;
     if (method === 'post') {
-      const res = await uni.request({
+      res = await uni.request({
         url: apiUrl,
         data,
         header: {
@@ -19,21 +23,30 @@ const request = async ({ url, data, method }) => {
         },
         method: 'POST',
       });
-
-      return res.data;
     } else {
-      const res = await uni.request({
+      res = await uni.request({
         url: apiUrl,
         data,
         method: 'GET',
       });
+    }
 
+    uni.hideLoading();
+    if (res.data.code == 410) {
+      uni.showModal({
+        title: res.data.msg.title,
+        content: res.data.msg.content,
+      });
+
+      return false;
+    } else {
       return res.data;
     }
   } catch (error) {
     console.log('====================================');
     console.log(apiUrl, 'error:', error);
     console.log('====================================');
+    uni.hideLoading();
     uni.showModal({
       title: '网络请求错误',
       showCancel: false,
