@@ -1,4 +1,4 @@
-import config from '../config.js';
+import config from "../config.js";
 
 export default {
   data() {
@@ -20,24 +20,27 @@ export default {
     hideTabbar() {
       const pages = getCurrentPages();
       const route = pages[pages.length - 1].route;
-      const tabPages = ['pages/index/index', 'pages/member/index'];
+      const tabPages = ["pages/index/index", "pages/member/index"];
       // 判断当前是否为tab页面, 是则隐藏原生tabbar
       const has = tabPages.includes(route);
       if (has) uni.hideTabBar();
     },
-
-    exemptClass(exempt) {
-      if (exempt == '有效' || exempt == '已延期') {
-        return 'tag-primary';
-      } else if (exempt == '即将到期') {
-        return 'tag-warning';
-      } else if (exempt == '已过期') {
-        return 'tag-error';
+    imagePreview(url) {
+      let urls;
+      if (typeof url !== "string") {
+        urls = url;
+      } else {
+        urls = [url];
       }
+
+      uni.previewImage({
+        current: 0,
+        urls,
+      });
     },
   },
   mounted() {
-    this.statusBarHeight = uni.getStorageSync('statusBarHeight');
+    this.statusBarHeight = uni.getStorageSync("statusBarHeight");
     // 隐藏tabbar
     // this.hideTabbar();
   },

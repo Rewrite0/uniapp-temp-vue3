@@ -11,7 +11,16 @@ page {
 button {
   font-size: inherit;
   line-height: 2;
-  padding: 0 0.75em;
+  background: none;
+  border: 0;
+
+  &::after {
+    display: none;
+  }
+}
+
+label {
+  display: block;
 }
 
 .status-bar {
@@ -28,12 +37,29 @@ button {
   color: var(--bline-color, var(--color));
 
   &::after {
-    content: '';
+    content: "";
     display: block;
     height: 1px;
     width: 100%;
     background: var(--bline-color, var(--color));
   }
+}
+
+.rel {
+  position: relative;
+}
+
+.none {
+  display: none !important;
+}
+
+.page-content {
+  padding: 30rpx;
+}
+
+.circle {
+  border-radius: 50%;
+  overflow: hidden;
 }
 
 /* =============== Start flex =============== */
@@ -80,6 +106,14 @@ button {
 
 .flex-jc-cer {
   justify-content: center;
+}
+
+.flex-jc-start {
+  justify-content: flex-start;
+}
+
+.flex-jc-end {
+  justify-content: flex-end;
 }
 
 .flex-jc-sa {
@@ -165,6 +199,20 @@ button {
   background: $theme-color;
 }
 
+.bg-white {
+  background: #fff;
+}
+
+.fc-white {
+  color: white;
+  --color: #fff;
+}
+
+.fc-black {
+  color: black;
+  --color: black;
+}
+
 .circle-border {
   border-width: 1px;
   border-style: solid;
@@ -184,7 +232,38 @@ button {
   height: auto;
 }
 
-@for $number from 1 through 100 {
+@for $number from 1 through 500 {
+  .w-#{$number} {
+    width: $number * 1rpx;
+  }
+
+  .h-#{$number} {
+    height: $number * 1rpx;
+  }
+
+  .size-#{$number} {
+    width: $number * 1rpx;
+    height: $number * 1rpx;
+  }
+
+  @if $number <= 100 {
+    .width-#{$number} {
+      width: $number * 1%;
+    }
+
+    .height-#{$number} {
+      height: $number * 1%;
+    }
+  }
+
+  @if $number < 100 {
+    .scale-#{$number} {
+      transform: scale(0.01 * $number);
+    }
+  }
+}
+
+@for $number from 1 through 120 {
   .gap-#{$number} {
     display: flex;
     gap: #{$number}rpx;
@@ -192,6 +271,10 @@ button {
 
   .mt-#{$number} {
     margin-top: #{$number}rpx;
+  }
+
+  .mb-#{$number} {
+    margin-bottom: #{$number}rpx;
   }
 
   .ml-#{$number} {
@@ -202,12 +285,42 @@ button {
     margin-right: #{$number}rpx;
   }
 
-  .width-#{$number} {
-    width: $number * 1%;
+  .mlr-#{$number} {
+    margin-left: #{$number}rpx;
+    margin-right: #{$number}rpx;
   }
 
-  .height-#{$number} {
-    height: $number * 1%;
+  .mtb-#{$number} {
+    margin-top: #{$number}rpx;
+    margin-bottom: #{$number}rpx;
+  }
+
+  .pd-#{$number} {
+    padding: $number * 1rpx;
+  }
+
+  .pdl-#{$number} {
+    padding-left: $number * 1rpx;
+  }
+
+  .pdr-#{$number} {
+    padding-right: $number * 1rpx;
+  }
+  .pdt-#{$number} {
+    padding-top: $number * 1rpx;
+  }
+  .pdb-#{$number} {
+    padding-bottom: $number * 1rpx;
+  }
+
+  .pdlr-#{$number} {
+    padding-left: $number * 1rpx;
+    padding-right: $number * 1rpx;
+  }
+
+  .pdtb-#{$number} {
+    padding-top: $number * 1rpx;
+    padding-bottom: $number * 1rpx;
   }
 
   @if $number > 16 {
@@ -216,9 +329,35 @@ button {
     }
   }
 
-  @if $number < 20 {
+  @if $number < 60 {
     .ra-#{$number} {
       border-radius: #{$number}rpx;
+    }
+
+    .rat-#{$number} {
+      border-top-left-radius: #{$number}rpx;
+      border-top-right-radius: #{$number}rpx;
+    }
+
+    .rab-#{$number} {
+      border-bottom-left-radius: #{$number}rpx;
+      border-bottom-right-radius: #{$number}rpx;
+    }
+
+    .ratl-#{$number} {
+      border-top-left-radius: #{$number}rpx;
+    }
+
+    .ratr-#{$number} {
+      border-top-right-radius: #{$number}rpx;
+    }
+
+    .rabl-#{$number} {
+      border-bottom-left-radius: #{$number}rpx;
+    }
+
+    .rabr-#{$number} {
+      border-bottom-right-radius: #{$number}rpx;
     }
   }
 
@@ -226,15 +365,17 @@ button {
     .bw-#{$number} {
       border-width: #{$number}px;
     }
+  }
 
-    .lh-#{$number} {
-      line-height: #{$number};
+  @if $number < 10 {
+    .opacity-0#{$number} {
+      opacity: 0.1 * $number;
     }
   }
 
-  @if $number < 50 {
-    .ra-#{$number} {
-      border-radius: #{$number}rpx;
+  @if $number <= 20 {
+    .lh-#{$number} {
+      line-height: 1 + $number * 0.1;
     }
   }
 }

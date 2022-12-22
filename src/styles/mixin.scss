@@ -1,27 +1,6 @@
-$theme-color: #3871e3;
+$theme-color: #000;
 $page-color: #fff;
 $tabbar-height: 210rpx;
-
-// color
-$warning: #f76260;
-$error: #fe0000;
-$primary: $theme-color;
-$complete: #6f7a8e;
-$service: #3aa884;
-$check: #e47a2e;
-$tips: #00c5db;
-$invalid: #aeb0b5;
-
-$colors: (
-  error: $error,
-  primary: $theme-color,
-  warning: $warning,
-  complete: $complete,
-  service: $service,
-  check: $check,
-  tips: $tips,
-  invalid: $invalid,
-);
 
 @mixin size($size) {
   width: $size;
@@ -107,7 +86,7 @@ $colors: (
   position: relative;
 
   &::after {
-    content: '';
+    content: "";
     display: block;
     width: 100%;
     height: $height;
